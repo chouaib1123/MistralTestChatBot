@@ -89,6 +89,7 @@ body {
     grid-template-columns: 1fr auto;
     width: 90%;
     margin-bottom: 20px;
+    margin: auto auto 20px;
 }
 
 .InputField button {
