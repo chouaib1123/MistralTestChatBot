@@ -8,7 +8,6 @@ const HomePage = () =>
   const [messages,setMessages] = useState([]);
   const [inputValue , setInputValue] = useState("");
   const [loading , setLoading] = useState(false);
-  const element = document.querySelector(".Messages");
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
