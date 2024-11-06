@@ -1,95 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import { useState , useEffect } from "react";
+import "./style.css";
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+const HomePage = () =>
+{
+  const [messages,setMessages] = useState([]);
+  const [inputValue , setInputValue] = useState("");
+  const [loading , setLoading] = useState(false);
+  const element = document.querySelector(".Messages");
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+  const handleSubmit = async (event) => {
+    
+    event.preventDefault();
+    
+    
+    if(inputValue !== ""){
+      const Input = inputValue;
+      setLoading(true);
+      setMessages((prevMessages) => [...prevMessages, { sender: "user", message: Input }]);
+      setInputValue("");
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "bot", message: ". . ." },
+      ]);
+      try {
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: Input }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch response');
+      }
+
+  
+      const data = await response.json();
+  
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages];
+        updatedMessages[updatedMessages.length - 1] = {
+          sender: "bot",
+          message: data.text,
+        };
+
+        return updatedMessages;
+      });
+
+  
+      setLoading(false);
+      setInputValue("");
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false);
+    }}
+    
+  };
+  useEffect(() => {
+    const element = document.querySelector(".Messages");
+    if (element) {
+      element.scrollTop = element.scrollHeight;
+    }
+  }, [messages]);
+  
+ 
+  return(
+  <div className="MainChat">
+      <h1>
+      <img 
+        src="/Mistral.png" 
+        alt="Mistral ChatBot Logo" 
+        style={{ marginRight: '10px', verticalAlign: 'middle' }}
+      />
+      Mistral ChatBot
+      </h1>
+      <div className="Messages">{messages.map((msg,index) =>{
+        return <div key={index} className="Message">
+          <strong>{msg.sender === "user" ? "You" : "Mistral"}</strong> 
+          
+          <p>{msg.message}</p>
+          </div>
+      } )}        
+      </div>
+      <div className="InputField">
+        <input type="text" name="Input" onChange={handleInputChange} id="Input" placeholder="What do you have in mind ? " value={inputValue}/>
+        <button onClick={handleSubmit} disabled={loading}>{loading ? "Loading..." : "Send"}</button>
+      </div>
+  </div>
+  )
+  ;
+};
+
+export default HomePage;

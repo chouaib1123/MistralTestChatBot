@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Itim', sans-serif;
+}
+
+@font-face {
+    font-family: 'Itim';
+    src: url('/fonts/Itim-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #f0f0f0, #d3d3d3, #a9a9a9, #808080, #505050);
+    background-size: 400% 400%;
+    animation: gradientBackground 10s ease infinite;
+}
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.MainChat {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    margin: 0 20vw;
+    gap: 20px;
+}
+
+.Message {
+    display: grid;
+    grid-template-columns: 15% auto;
+    margin-bottom: 20px;
+}
+
+.Message strong {
+    font-size: 1.2em;
+}
+
+.Message p {
+    align-self: center;
+}
+
+.Messages {
+    overflow-y: scroll;
+    flex-grow: 1;
+    padding: 15px;
+    scroll-behavior: smooth;
+}
+
+.Messages::-webkit-scrollbar {
+    display: none;
+}
+
+.Messages {
+    scrollbar-width: none;
+}
+
+.MainChat h1 {
+    margin-top: 20px;
+    font-size: 2em;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MainChat h1 img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.InputField {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.InputField button {
+    padding: 10px;
+}
+
+.InputField input {
+    padding: 10px;
+    width: 100%;
+}
+
+.InputField input:focus {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .MainChat {
+        margin: 0 2vw;
+    }
+
+    .Message {
+        grid-template-columns: 20% auto;
+    }
+
+    .MainChat h1 {
+        font-size: 1.5em;
+    }
+
+    .MainChat h1 img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .InputField {
+        margin-bottom: 15px;
+    }
+
+    .InputField button {
+        padding: 8px;
+    }
+
+    .InputField input {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .MainChat {
+        margin: 0 1vw;
+    }
+
+    .Message {
+        grid-template-columns: 25% auto;
+    }
+
+    .Message strong {
+        font-size: 1em;
+    }
+
+    .MainChat h1 {
+        font-size: 1.2em;
+    }
+
+    .MainChat h1 img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .InputField button {
+        padding: 6px;
+    }
+
+    .InputField input {
+        padding: 6px;
+    }
+}
