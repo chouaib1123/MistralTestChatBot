@@ -11,7 +11,7 @@ export async function POST(req) {
     }
 
     const chatResponse = await client.chat.complete({
-      model: 'mistral-large-latest',
+      model: 'ministral-3b-latest',
       messages: [{ role: 'user', content: message }],
     });
 
