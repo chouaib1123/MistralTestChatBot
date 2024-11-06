@@ -165,3 +165,10 @@ body {
         padding: 6px;
     }
 }
+
+.Title{
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    text-align: center;
+}

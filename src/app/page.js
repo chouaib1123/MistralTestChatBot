@@ -69,6 +69,7 @@ const HomePage = () => {
 
   return (
     <div className="MainChat">
+
       <h1>
         <img
           src="/Mistral.png"
@@ -78,15 +79,19 @@ const HomePage = () => {
         Mistral ChatBot
       </h1>
       <div className="Messages">
-        {messages.map((msg, index) => {
-          return (
-            <div key={index} className="Message">
-              <strong>{msg.sender === "user" ? "You" : "Mistral"}</strong>
-              <p>{msg.message}</p>
-            </div>
-          );
-        })}
-      </div>
+      {messages.length === 0 ? (
+        <h3 className="Title">Hello To Mistral chat bot . Mistral is here to assisst you !</h3>
+      ) : (
+        messages.map((msg, index) => (
+          <div key={index} className="Message">
+            <strong>{msg.sender === "user" ? "You" : "Mistral"}</strong>
+            <p>{msg.message}</p>
+          </div>
+        ))
+      )}
+     </div>
+
+       
       <div className="InputField">
         <input
           type="text"
