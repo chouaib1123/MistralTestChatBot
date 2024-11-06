@@ -87,7 +87,7 @@ body {
 .InputField {
     display: grid;
     grid-template-columns: 1fr auto;
-    width: 100%;
+    width: 90%;
     margin-bottom: 20px;
 }
 
