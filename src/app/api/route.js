@@ -12,6 +12,10 @@ export async function POST(req) {
 
     const chatResponse = await client.chat.complete({
       model: 'ministral-3b-latest',
+      max_tokens: 150,
+      temperature: 0.7,
+      top_p: 0.9,
+      top_k: 50,
       messages: [{ role: 'user', content: message }],
     });
 
