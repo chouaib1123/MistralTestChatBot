@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { marked } from "marked";
 import "./style.css";
 
 const HomePage = () => {
@@ -69,40 +70,38 @@ const HomePage = () => {
 
   return (
     <div className="MainChat">
-
       <h1>
-        <img
+        
+        Mistral <img
           src="/Mistral.png"
           alt="Mistral ChatBot Logo"
-          style={{ marginRight: "10px", verticalAlign: "middle" }}
-        />
-        Mistral ChatBot
+        /> ChatBot
       </h1>
       <div className="Messages">
-      {messages.length === 0 ? (
-        <h3 className="Title">Hello To Mistral chat bot . Mistral is here to assisst you !</h3>
-      ) : (
-        messages.map((msg, index) => (
-          <div key={index} className="Message">
-            <strong>{msg.sender === "user" ? "You" : "Mistral"}</strong>
-            <p>{msg.message}</p>
-          </div>
-        ))
-      )}
-     </div>
-
-       
+        {messages.length === 0 ? (
+          <h2 className="Title">Hello, how can I assist you today <p>?</p></h2>
+        ) : (
+          messages.map((msg, index) => (
+            <div key={index} className="Message">
+              <strong>{msg.sender === "user" ? "You" : "Mistral"}</strong>
+              <p dangerouslySetInnerHTML={{ 
+                __html: msg.sender === "bot" ? marked(msg.message) : msg.message 
+              }} />
+            </div>
+          ))
+        )}
+      </div>
       <div className="InputField">
         <input
           type="text"
           name="Input"
           onChange={handleInputChange}
           id="Input"
-          placeholder="What do you have in mind ? "
+          placeholder="What do you have in mind?"
           value={inputValue}
         />
         <button onClick={handleSubmit} disabled={loading}>
-          {loading ? "Loading..." : "Send"}
+          {loading ? "Loading..." : "ASK"}
         </button>
       </div>
     </div>

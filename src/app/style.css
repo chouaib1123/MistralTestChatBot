@@ -13,28 +13,20 @@
 }
 
 body {
-    height: 90vh;
-    background: linear-gradient(135deg, #f0f0f0, #d3d3d3, #a9a9a9, #808080, #505050);
-    background-size: 400% 400%;
-    animation: gradientBackground 10s ease infinite;
+    height: 100vh;
+    background: linear-gradient(45deg, rgb(255, 115, 0.5),rgb(255, 153, 0,0.5), rgb(235, 235, 7,0.5));
+    padding-top: 20px ;
+    
 }
 
-@keyframes gradientBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+button{
+    cursor: pointer;
 }
 
 .MainChat {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    height: 100%;
+    height: 95%;
     margin: 0 20vw;
     gap: 20px;
 }
@@ -47,6 +39,7 @@ body {
 
 .Message strong {
     font-size: 1.2em;
+
 }
 
 .Message p {
@@ -56,20 +49,20 @@ body {
 .Messages {
     overflow-y: scroll;
     flex-grow: 1;
-    padding: 15px;
+    padding: 50px;
+    margin: 50px auto;
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    width: 100%;
 }
 
 .Messages::-webkit-scrollbar {
     display: none;
 }
 
-.Messages {
-    scrollbar-width: none;
-}
+
 
 .MainChat h1 {
-    margin-top: 20px;
     font-size: 2em;
     text-align: center;
     padding: 10px;
@@ -79,35 +72,84 @@ body {
 }
 
 .MainChat h1 img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+    width: 70px;
+    height: 70px;
 }
 
 .InputField {
     display: grid;
     grid-template-columns: 1fr auto;
-    width: 90%;
-    margin-bottom: 20px;
+    width: 100%;
     margin: auto auto 20px;
+    background-color: rgba(255, 255, 255, 0.719);
+    border-radius: 20px;
+    padding-left: 15px;
+    
+}
+.Messages li{
+    margin-left: 20px;
+}
+.Title {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
+.Title p {
+    margin-left: 3px;
+    display: inline-block;
+    animation: questionMarkAnimation 1s infinite;
+}
+
+@keyframes questionMarkAnimation {
+    0% {
+        transform: rotateZ(0deg) scale(1); 
+    }
+    50% {
+        transform: rotateZ(10deg) scale(1.4); 
+    }
+    100% {
+        transform: rotateZ(0deg) scale(1); 
+    }
+}
+
+
+
 .InputField button {
-    padding: 10px;
+    padding: 15px 40px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: none;
+    background: linear-gradient(45deg, rgb(255, 115, 0),rgb(255, 153, 0), yellow);
+    transition-duration: .5s;
+}
+.InputField button:hover {
+    color: white;
+    
 }
 
 .InputField input {
     padding: 10px;
     width: 100%;
+    border-radius: 20px;
+    background: none;
+    border: none;
 }
 
 .InputField input:focus {
     outline: none;
 }
-
+@media (max-width: 1000px) {
+    .MainChat{
+        margin: 0 10vw;
+    }
+}
 @media (max-width: 768px) {
     .MainChat {
-        margin: 0 2vw;
+        margin: 0 10vw;
     }
 
     .Message {
@@ -126,10 +168,11 @@ body {
     .InputField {
         margin-bottom: 15px;
     }
-
-    .InputField button {
-        padding: 8px;
+    .Messages{
+        margin: 30px auto;
+        padding: 10px;
     }
+   
 
     .InputField input {
         padding: 8px;
@@ -138,12 +181,10 @@ body {
 
 @media (max-width: 480px) {
     .MainChat {
-        margin: 0 1vw;
+        margin: 0 3vw;
     }
 
-    .Message {
-        grid-template-columns: 25% auto;
-    }
+    
 
     .Message strong {
         font-size: 1em;
@@ -159,7 +200,7 @@ body {
     }
 
     .InputField button {
-        padding: 6px;
+        padding: 12px 30px;
     }
 
     .InputField input {
@@ -167,9 +208,3 @@ body {
     }
 }
 
-.Title{
-    display: flex;
-    justify-content: center;
-    margin-top: 200px;
-    text-align: center;
-}
