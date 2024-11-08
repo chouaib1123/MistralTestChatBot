@@ -13,10 +13,10 @@
 }
 
 body {
-    height: 100vh;
+    
     background: linear-gradient(45deg, rgb(255, 115, 0.5),rgb(255, 153, 0,0.5), rgb(235, 235, 7,0.5));
     padding-top: 20px ;
-    
+    height: 100vh;
 }
 
 button{
@@ -26,9 +26,9 @@ button{
 .MainChat {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    height: 95%;
     margin: 0 20vw;
     gap: 20px;
+    height: 90vh;
 }
 
 .Message {
